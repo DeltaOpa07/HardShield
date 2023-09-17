@@ -34,13 +34,13 @@ BOOLEAN GenPairKeysToFile(BCRYPT_ALG_HANDLE hCryptProvider)
 			break;
 		}
 
-		// export pub key to file
+		// export pub key to local file 
 		fOk = ExportToFile(hKeyHdl, BCRYPT_RSAPUBLIC_BLOB, TEXT("HardShield.public"));
 		if (!fOk)
 		{
 			break;
 		}
-		// export pri key to file
+		// export pri key to local file
 		fOk = ExportToFile(hKeyHdl, BCRYPT_RSAPRIVATE_BLOB, TEXT("HardShield.private"));
 		if (!fOk)
 		{

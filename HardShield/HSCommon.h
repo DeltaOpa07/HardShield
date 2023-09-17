@@ -19,6 +19,7 @@
 #define STATUS_UNSUCCESSFUL 0xC0000001
 #endif
 
+// structure needs to use when use AES
 #pragma pack(1)
 typedef struct _AESOBJ
 {

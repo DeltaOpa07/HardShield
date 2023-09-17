@@ -132,7 +132,7 @@ BOOLEAN ExportToMem(BCRYPT_KEY_HANDLE hKeyHdl, LPCWSTR pKeyType, PBYTE pbBlob, U
 
 	do
 	{
-		// 获取需要的长度
+		// Get the length that key needs
 		status = BCryptExportKey(hKeyHdl, NULL, pKeyType, NULL, 0, &cbData, 0);
 		if (!NT_SUCCESS(status))
 		{
@@ -169,7 +169,7 @@ Encrypt(BCRYPT_KEY_HANDLE hKeyHdl,
 	ULONG cbBlock = RSABITS / 8;			// 256
 	ULONG cbMaxEncBlk = cbBlock - 11;
 	ULONG cbMaxDecBlk = cbBlock;
-	// 加密结束后文件大小的最大值
+	// the max size after encryption
 	ULONG cbMaxCipher = (INT)(((cbPlain + cbMaxEncBlk - 1) / cbMaxEncBlk) * cbBlock);
 	ULONG cbData = 0;
 	ULONG cbResult = 0;

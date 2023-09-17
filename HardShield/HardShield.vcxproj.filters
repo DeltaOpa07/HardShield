@@ -21,15 +21,27 @@
     <ClCompile Include="HSCommon.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="HSCrypt.cpp">
+    <ClCompile Include="HSRSA.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HSAES.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemInfo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HSCrypt.h">
+    <ClInclude Include="HSRSA.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="HSCommon.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HSAES.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemInfo.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

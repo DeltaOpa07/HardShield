@@ -8,18 +8,40 @@
 # 2. Features & Components
    The HardShield ransomware has three parts currently, including:
    1. **Builder(VC++):** 
-      a. you can setup a ransom mail on it
-      b. build decryptor, encryptor, and generate keys
+
+      * you can setup a ransom mail on it
+
+
+      * build decryptor, encryptor, and generate keys
+
    2. **Encryptor(C or Intel assembly):** 
-      a. encrypt all image or data files(won't destroy the system) by CBC AES128+RSA2048, unbreakable
-      b. after encryption is over, it will popup a dialog and show the ransom info like wannacry
-      c. it steals all data from the victim and send back to server
-      d. change the desktop image
-      e. delete volume shadow copy and clean the recycle bin
-      f. kill active processes and stop services which will be against the encryption
-      g. multithread encryption
-      h. encrypt net disk files and removable device
-      i. Self-delete after all done
+
+      * encrypt all image or data files(won't destroy the system) by CBC AES128+RSA2048, unbreakable
+
+
+      * after encryption is over, it will popup a dialog and show the ransom info like wannacry
+
+
+      * it steals all data from the victim and send back to server
+
+
+      * change the desktop image
+
+
+      * delete volume shadow copy and clean the recycle bin
+
+
+      * kill active processes and stop services which will be against the encryption
+
+
+      * multithread encryption
+
+
+      * encrypt net disk files and removable device
+
+
+      * Self-delete after all done
+
    3. **Decryptor(C or Intel assembly):**
       Decrypt the selected files or directories, of course you can choose to decrypt all files on your disk
       multithread decryption
