@@ -1,0 +1,12 @@
+# 忽略目录部分
+Debug/
+Release/
+.vs/
+bin/
+dummy/
+
+# 忽略文件部分
+*.exe
+*.aps
+*.obj
+*.pdb

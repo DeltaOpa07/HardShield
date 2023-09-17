@@ -1,0 +1,27 @@
+#include "HSCommon.h"
+
+LPCTSTR pcszFileExts[] = {
+	TEXT(".doc"), TEXT(".docx"), TEXT(".xls"), TEXT(".xlsx"), TEXT(".ppt"), TEXT(".pptx"), TEXT(".pst"),
+	TEXT(".ost"), TEXT(".msg"), TEXT(".emTEXT("), TEXT(".vsd"), TEXT(".vsdx"), TEXT(".txt"), TEXT(".csv"),
+	TEXT(".rtf"), TEXT(".123"), TEXT(".wks"), TEXT(".wk1"), TEXT(".pdf"), TEXT(".dwg"), TEXT(".onetoc2"),
+	TEXT(".snt"), TEXT(".jpeg"), TEXT(".jpg"), TEXT(".docb"), TEXT(".docm"), TEXT(".dot"), TEXT(".dotm"),
+	TEXT(".dotx"), TEXT(".xlsm"), TEXT(".xlsb"), TEXT(".xlw"), TEXT(".xlt"), TEXT(".xlm"), TEXT(".xlc"),
+	TEXT(".xltx"), TEXT(".xltm"), TEXT(".pptm"), TEXT(".pot"), TEXT(".pps"), TEXT(".ppsm"), TEXT(".ppsx"),
+	TEXT(".ppam"), TEXT(".potx"), TEXT(".potm"), TEXT(".edb"), TEXT(".hwp"), TEXT(".602"), TEXT(".sxi"),
+	TEXT(".sti"), TEXT(".sldx"), TEXT(".sldm"), TEXT(".sldm"), TEXT(".vdi"), TEXT(".vmdk"), TEXT(".vmx"),
+	TEXT(".gpg"), TEXT(".aes"), TEXT(".ARC"), TEXT(".PAQ"), TEXT(".bz2"), TEXT(".tbk"), TEXT(".bak"), TEXT(".tar"),
+	TEXT(".tgz"), TEXT(".gz"), TEXT(".7z"), TEXT(".rar"), TEXT(".zip"), TEXT(".backup"), TEXT(".iso"), TEXT(".vcd"),
+	TEXT(".bmp"), TEXT(".png"), TEXT(".gif"), TEXT(".raw"), TEXT(".cgm"), TEXT(".tif"), TEXT(".tiff"), TEXT(".nef"),
+	TEXT(".psd"), TEXT(".ai"), TEXT(".svg"), TEXT(".djvu"), TEXT(".m4u"), TEXT(".m3u"), TEXT(".mid"), TEXT(".wma"),
+	TEXT(".flv"), TEXT(".3g2"), TEXT(".mkv"), TEXT(".3gp"), TEXT(".mp4"), TEXT(".mov"), TEXT(".avi"), TEXT(".asf"),
+	TEXT(".mpeg"), TEXT(".vob"), TEXT(".mpg"), TEXT(".wmv"), TEXT(".fla"), TEXT(".swf"), TEXT(".wav"), TEXT(".mp3"),
+	TEXT(".sh"), TEXT(".class"), TEXT(".jar"), TEXT(".java"), TEXT(".rb"), TEXT(".asp"), TEXT(".php"), TEXT(".jsp"),
+	TEXT(".brd"), TEXT(".sch"), TEXT(".dch"), TEXT(".dip"), TEXT(".pTEXT("), TEXT(".vb"), TEXT(".vbs"), TEXT(".py"),
+	TEXT(".ps1"), TEXT(".bat"), TEXT(".cmd"), TEXT(".js"), TEXT(".asm"), TEXT(".h"), TEXT(".pas"), TEXT(".cpp"),TEXT(".c"),TEXT(".css"),
+	TEXT(".htmTEXT("),
+	TEXT(".cs"), TEXT(".suo"), TEXT(".sln"), TEXT(".ldf"), TEXT(".mdf"), TEXT(".ibd"), TEXT(".myi"), TEXT(".myd"), TEXT(".frm"),
+	TEXT(".odb"), TEXT(".dbf"), TEXT(".db"), TEXT(".mdb"), TEXT(".accdb"), TEXT(".sqTEXTL"), TEXT(".sqlitedb"), TEXT(".sqlite3"),
+	TEXT(".asc"), TEXT(".lay6"), TEXT(".lay"), TEXT(".mmL"), TEXT(".sxm"), TEXT(".otg"), TEXT(".odg"), TEXT(".uop"), TEXT(".std"),
+	TEXT(".sxd"), TEXT(".otp"), TEXT(".odp"), TEXT(".wb2"), TEXT(".slk"), TEXT(".dif"), TEXT(".stc"), TEXT(".sxc"), TEXT(".ots"),
+	TEXT(".ods"), TEXT(".3dm"), TEXT(".max"), TEXT(".3ds"), TEXT(".uot"), TEXT(".stw"), TEXT(".sxw"), TEXT(".ott"), TEXT(".odt"),
+	TEXT(".pem"), TEXT(".p12"), TEXT(".csr"), TEXT(".crt"), TEXT(".key"), TEXT(".pfx"), TEXT(".der"), TEXT(".dat") };
