@@ -33,6 +33,7 @@ BOOLEAN GenPairKeysToFile(BCRYPT_ALG_HANDLE hCryptProvider)
 		{
 			break;
 		}
+
 		// export pub key to file
 		fOk = ExportToFile(hKeyHdl, BCRYPT_RSAPUBLIC_BLOB, TEXT("HardShield.public"));
 		if (!fOk)
