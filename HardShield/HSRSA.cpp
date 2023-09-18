@@ -1,7 +1,7 @@
 #include "HSRSA.h"
 
 
-BCRYPT_ALG_HANDLE InitRSA()
+BCRYPT_ALG_HANDLE RSA::InitRSA()
 {
 	NTSTATUS status = STATUS_UNSUCCESSFUL;
 	BOOLEAN fOk = FALSE;
@@ -29,7 +29,7 @@ BCRYPT_ALG_HANDLE InitRSA()
 }
 
 
-BCRYPT_KEY_HANDLE GenKey(BCRYPT_ALG_HANDLE hCryptProvider)
+BCRYPT_KEY_HANDLE RSA::GenKey(BCRYPT_ALG_HANDLE hCryptProvider)
 {
 	NTSTATUS status = STATUS_UNSUCCESSFUL;
 	BCRYPT_KEY_HANDLE hCryptKey = INVALID_HANDLE_VALUE;
@@ -62,7 +62,7 @@ BCRYPT_KEY_HANDLE GenKey(BCRYPT_ALG_HANDLE hCryptProvider)
 	return(hCryptKey);
 }
 
-BCRYPT_KEY_HANDLE ImportKeyFromMem(BCRYPT_ALG_HANDLE hCryptProvider, LPCTSTR pKeyType, PUCHAR pbBlob, ULONG cbBlob)
+BCRYPT_KEY_HANDLE RSA::ImportKeyFromMem(BCRYPT_ALG_HANDLE hCryptProvider, LPCWSTR pKeyType, PUCHAR pbBlob, ULONG cbBlob)
 {
 	NTSTATUS status = STATUS_UNSUCCESSFUL;
 	BCRYPT_KEY_HANDLE hCryptKey = INVALID_HANDLE_VALUE;
@@ -73,15 +73,15 @@ BCRYPT_KEY_HANDLE ImportKeyFromMem(BCRYPT_ALG_HANDLE hCryptProvider, LPCTSTR pKe
 		status = BCryptImportKeyPair(hCryptProvider, NULL, pKeyType, &hCryptKey, pbBlob, cbBlob, 0);
 		if (!NT_SUCCESS(status))
 		{
+			hCryptKey = INVALID_HANDLE_VALUE;
 			break;
 		}
-		hCryptKey = INVALID_HANDLE_VALUE;
 	} while (FALSE);
 
 	return(hCryptKey);
 }
 
-BCRYPT_KEY_HANDLE ImportKeyFromFile(BCRYPT_ALG_HANDLE hCryptProvider, LPCWSTR pKeyType, LPCTSTR pFileName)
+BCRYPT_KEY_HANDLE RSA::ImportKeyFromFile(BCRYPT_ALG_HANDLE hCryptProvider, LPCWSTR pKeyType, LPCTSTR pFileName)
 {
 	HANDLE hFile = INVALID_HANDLE_VALUE;
 	BYTE bBlob[4096] = { 0 };
@@ -124,7 +124,7 @@ BCRYPT_KEY_HANDLE ImportKeyFromFile(BCRYPT_ALG_HANDLE hCryptProvider, LPCWSTR pK
 	return(hKeyHdl);
 }
 
-BOOLEAN ExportToMem(BCRYPT_KEY_HANDLE hKeyHdl, LPCWSTR pKeyType, PBYTE pbBlob, ULONG cbBlob, PULONG pKeyLen)
+BOOLEAN RSA::ExportToMem(BCRYPT_KEY_HANDLE hKeyHdl, LPCWSTR pKeyType, PBYTE pbBlob, ULONG cbBlob, PULONG pKeyLen)
 {
 	NTSTATUS status = STATUS_UNSUCCESSFUL;
 	ULONG cbData = 0;
@@ -158,7 +158,7 @@ BOOLEAN ExportToMem(BCRYPT_KEY_HANDLE hKeyHdl, LPCWSTR pKeyType, PBYTE pbBlob, U
 }
 
 BOOLEAN 
-Encrypt(BCRYPT_KEY_HANDLE hKeyHdl, 
+RSA::Encrypt(BCRYPT_KEY_HANDLE hKeyHdl,
 	PUCHAR pbPlain, 
 	ULONG cbPlain, 
 	PUCHAR pbCipher, 
@@ -198,7 +198,7 @@ Encrypt(BCRYPT_KEY_HANDLE hKeyHdl,
 		status = BCryptEncrypt(hKeyHdl, pbPlain + i, s, NULL, NULL, 0, pbCipher + cbResult, cbBlock, &cbData, BCRYPT_PAD_PKCS1);
 		if (!NT_SUCCESS(status))
 		{
-			break;
+			return(FALSE);
 		}
 		cbResult += cbData;
 	}
@@ -208,11 +208,11 @@ Encrypt(BCRYPT_KEY_HANDLE hKeyHdl,
 		*pcbResult = cbResult;
 	}
 
-	return(FALSE);
+	return(TRUE);
 }
 
 BOOLEAN
-Decrypt(BCRYPT_KEY_HANDLE hKeyHdl, 
+RSA::Decrypt(BCRYPT_KEY_HANDLE hKeyHdl,
 	PUCHAR pbCipher, 
 	ULONG cbCipher, 
 	PUCHAR pbPlain, 
@@ -249,7 +249,11 @@ Decrypt(BCRYPT_KEY_HANDLE hKeyHdl,
 	return(TRUE);
 }
 
-BOOLEAN ExportToFile(BCRYPT_KEY_HANDLE hKeyHdl, LPCWSTR pKeyType, LPCTSTR pFileName, BOOLEAN fCryptKey)
+BOOLEAN 
+RSA::ExportToFile(BCRYPT_KEY_HANDLE hKeyHdl, 
+	LPCWSTR pKeyType, 
+	LPCTSTR pFileName, 
+	BOOLEAN fCryptKey)
 {
 	HANDLE hFile = INVALID_HANDLE_VALUE;
 	UCHAR bBlob[4096] = { 0 };

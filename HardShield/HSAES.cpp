@@ -1,6 +1,6 @@
 #include "HSAES.h"
 
-VOID InitAESObj(PAESOBJ pAesObj)
+VOID AES::InitAESObj(PAESOBJ pAesObj)
 {
 	if (!pAesObj)
 	{
@@ -13,7 +13,7 @@ VOID InitAESObj(PAESOBJ pAesObj)
 	return;
 }
 
-VOID DestroyAESObj(PAESOBJ pAesObj)
+VOID AES::DestroyAESObj(PAESOBJ pAesObj)
 {
 	if (!pAesObj)
 	{
@@ -39,10 +39,11 @@ VOID DestroyAESObj(PAESOBJ pAesObj)
 	if (INVALID_HANDLE_VALUE != pAesObj->hKeyHdl)
 	{
 		BCryptDestroyKey(pAesObj->hKeyHdl);
+		pAesObj->hKeyHdl = INVALID_HANDLE_VALUE;
 	}
 }
 
-BOOLEAN HSInitAES(PAESOBJ pAesObj)
+BOOLEAN AES::HSInitAES(PAESOBJ pAesObj)
 {
 	NTSTATUS status = STATUS_SUCCESS;
 	BCRYPT_ALG_HANDLE hCryptProvider = INVALID_HANDLE_VALUE;
@@ -63,7 +64,7 @@ BOOLEAN HSInitAES(PAESOBJ pAesObj)
 		{
 			break;
 		}
-		InitAESObj(pAesObj);
+		AES::InitAESObj(pAesObj);
 
 		status = BCryptOpenAlgorithmProvider(&hCryptProvider, BCRYPT_AES_ALGORITHM, NULL, 0);
 		if (!NT_SUCCESS(status))
@@ -92,6 +93,7 @@ BOOLEAN HSInitAES(PAESOBJ pAesObj)
 		pAesObj->cbKeyObject = cbKeyObject;
 		pAesObj->pbKeyObject = pbKeyObject;
 		pAesObj->hCryptProvider = hCryptProvider;
+		
 		fOk = TRUE;
 	} while (FALSE);
 
@@ -113,6 +115,129 @@ BOOLEAN HSInitAES(PAESOBJ pAesObj)
 			hCryptProvider = INVALID_HANDLE_VALUE;
 		}
 	}
+
+	return(fOk);
+}
+
+BOOLEAN AES::GenKey(PAESOBJ pAesObj, PUCHAR pbKey, ULONG cbKey)
+{
+	NTSTATUS status = STATUS_UNSUCCESSFUL;
+	BCRYPT_KEY_HANDLE hKeyHdl = INVALID_HANDLE_VALUE;
+	ULONG cbKeyObject = 0;
+
+	status = BCryptGenerateSymmetricKey(pAesObj->hCryptProvider,
+		&pAesObj->hKeyHdl, 
+		pAesObj->pbKeyObject, 
+		pAesObj->cbKeyObject, 
+		pbKey, 
+		cbKey, 
+		0);
+	if (!NT_SUCCESS(status))
+	{
+		return(FALSE);
+	}
+	
+	return(TRUE);
+}
+
+BOOLEAN AES::Encrypt(PAESOBJ pAesInfo, PUCHAR pbPlain, ULONG cbPlain, PUCHAR pbCipher, ULONG cbCipher, PULONG pcbResult)
+{
+	NTSTATUS status = STATUS_UNSUCCESSFUL;
+	ULONG cbData = 0;
+	BOOLEAN fOk = FALSE;
+
+	if (!pAesInfo || !pbPlain || !cbPlain || !pbCipher || !cbCipher || !pcbResult)
+	{
+		return(FALSE);
+	}
+	do
+	{
+		status = BCryptEncrypt(pAesInfo->hKeyHdl, 
+			pbPlain,
+			cbPlain, 
+			NULL, 
+			pAesInfo->pbIV, 
+			pAesInfo->cbIV, 
+			NULL, 
+			0, 
+			&cbData, 
+			0);
+		if (!NT_SUCCESS(status))
+		{
+			break;
+		}
+		if (pcbResult)
+		{
+			*pcbResult = cbData;
+		}
+		status = BCryptEncrypt(pAesInfo->hKeyHdl, 
+			pbPlain, 
+			cbPlain,
+			NULL, 
+			pAesInfo->pbIV, 
+			pAesInfo->cbIV, 
+			pbCipher, 
+			cbData, &cbData, 0);
+		if (!NT_SUCCESS(status))
+		{
+			break;
+		}
+		
+		fOk = TRUE;
+	} while (FALSE);
+	
+
+	return(fOk);
+}
+
+BOOLEAN AES::Decrypt(PAESOBJ pAesObj, 
+	PUCHAR pbCipher, 
+	ULONG cbCipher, 
+	PUCHAR pbPlain, 
+	ULONG cbPlain, 
+	PULONG pcbResult)
+{
+	NTSTATUS status = STATUS_SUCCESS;
+	ULONG cbData = 0;
+	BOOLEAN fOk = FALSE;
+
+	if (!pAesObj || !pbPlain || !cbPlain || !pbCipher || !cbCipher || !pcbResult)
+	{
+		return(FALSE);
+	}
+	do
+	{
+		status = BCryptDecrypt(pAesObj->hKeyHdl, pbCipher, cbCipher, NULL, pAesObj->pbIV, pAesObj->cbIV, NULL, 0, &cbData, 0);
+		if (!NT_SUCCESS(status))
+		{
+			break;
+		}
+		if (pcbResult)
+		{
+			*pcbResult = cbData;
+		}
+		// after the decrypt, the plain text size is smaller than the cipher text
+		// bcz AES128 is block cipher algorithm, each block is 16 bytes and it's align
+		if (cbPlain < cbData)
+		{
+			break;
+		}
+		status = BCryptDecrypt(pAesObj->hKeyHdl, 
+			pbCipher, 
+			cbCipher, 
+			NULL, 
+			pAesObj->pbIV, 
+			pAesObj->cbIV, 
+			pbPlain, 
+			cbData, 
+			&cbData, 
+			0);
+		if (!NT_SUCCESS(status))
+		{
+			break;
+		}
+		fOk = TRUE;
+	} while (FALSE);
 
 	return(fOk);
 }

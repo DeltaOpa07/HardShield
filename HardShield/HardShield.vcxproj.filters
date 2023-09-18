@@ -30,6 +30,18 @@
     <ClCompile Include="SystemInfo.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Api.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HSCrypto.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HSPubKey.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HSPriKey.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HSRSA.h">
@@ -42,6 +54,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SystemInfo.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Api.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HSCrypto.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Keys.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
